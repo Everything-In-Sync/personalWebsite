@@ -1,0 +1,290 @@
+/* ============================================
+   Personal Blog — Quiet, Text-First Design
+   ============================================ */
+
+/* CSS Custom Properties */
+:root {
+    /* Light mode (default) */
+    --bg: #F8F9FA;
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --text-tertiary: #6B7280;
+    --selection-bg: #D1D5DB;
+    --selection-text: #1F2937;
+    --focus-ring: #9CA3AF;
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-base: 17px;
+    --line-height: 1.65;
+    --font-weight-body: 400;
+    --letter-spacing-body: -0.005em;
+    --letter-spacing-heading: -0.02em;
+    --max-width: 38rem; /* ~65-70 characters */
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #141414;
+        --text-primary: #E5E7EB;
+        --text-secondary: #9CA3AF;
+        --text-tertiary: #6B7280;
+        --selection-bg: #374151;
+        --selection-text: #E5E7EB;
+        --focus-ring: #6B7280;
+        --font-weight-body: 450;
+    }
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing-body);
+    background-color: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Muted text selection */
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+}
+
+/* Main container — vertically centered */
+main {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing-heading);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Headings */
+h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-heading);
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-heading);
+    color: var(--text-primary);
+}
+
+/* Articles section */
+.articles {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Articles are stable — no layout shift */
+
+.article-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-link:hover h2 {
+    color: var(--text-secondary);
+}
+
+.article-link:focus {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.article-link:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.article-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+/* Meta text (dates, secondary info) */
+.meta {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1.5rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Footer */
+footer {
+    margin-top: 4rem;
+    padding-bottom: 3rem;
+}
+
+.quote {
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+/* Links in content (not article links) */
+a:not(.article-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+a:not(.article-link):hover {
+    color: var(--text-secondary);
+}
+
+a:not(.article-link):focus {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+a:not(.article-link):focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    main {
+        padding: 2rem 1.25rem;
+        justify-content: flex-start;
+        padding-top: 4rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.125rem;
+    }
+}
+
+/* Large screens — ensure text sits comfortably */
+@media (min-height: 800px) {
+    main {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+/* ============================================
+   Article Page
+   ============================================ */
+
+.article-page {
+    justify-content: flex-start;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.article-page nav {
+    margin-bottom: 3rem;
+}
+
+.back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.back-link:hover {
+    color: var(--text-primary);
+}
+
+.article-header {
+    margin-bottom: 2.5rem;
+}
+
+.article-header h1 {
+    margin-bottom: 0.75rem;
+}
+
+.article-content h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.article-page footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--text-tertiary);
+    opacity: 0.4;
+}
+
+.article-page footer:hover {
+    opacity: 1;
+}
+
+/* Responsive — article page */
+@media (max-width: 640px) {
+    .article-page {
+        padding-top: 2rem;
+    }
+    
+    .article-page nav {
+        margin-bottom: 2rem;
+    }
+}
+
